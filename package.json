@@ -46,7 +46,7 @@
     "dist"
   ],
   "dependencies": {
-    "lottie-web": "^5.5.9"
+    "lottie-web": "^5.6.10"
   },
   "keywords": [
     "react",
