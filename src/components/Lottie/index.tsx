@@ -53,7 +53,8 @@ export class Lottie extends React.PureComponent<ReactLottieOwnProps, ReactLottie
 
   componentWillUnmount() {
     this.removeEventListeners(this.props.lottieEventListeners);
-    this.animationItem.destroy();
+    this.animationItem.wrapper=this.animationItem.wrapper || {}
+    this.animationItem.destroy(this.animationItem.wrapper);
     (this.config as ReactLottieConfigWithData).animationData = null;
     (this.config as ReactLottieConfigWithPath).path = null;
     this.animationItem = null;
