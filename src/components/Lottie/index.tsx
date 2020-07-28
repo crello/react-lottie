@@ -2,6 +2,8 @@ import React from 'react';
 import lottiePlayer, { AnimationItem, AnimationConfig } from 'lottie-web';
 import { ReactLottieOwnProps, ReactLottieEvent, ReactLottieConfig, ReactLottiePlayingState, ReactLottieState, ReactLottieConfigWithData, ReactLottieConfigWithPath  } from './interface'
 
+const CONTAINER_ID_ATTRIBUTE = 'data-lottie-container-id';
+
 export class Lottie extends React.PureComponent<ReactLottieOwnProps, ReactLottieState> {
   private config: ReactLottieConfig;
   private containerRef: Element;
@@ -10,7 +12,26 @@ export class Lottie extends React.PureComponent<ReactLottieOwnProps, ReactLottie
     renderer: 'svg',
     loop: false,
     autoplay: true
-  }
+  };
+
+  private static generateUuid = () =>
+    'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+
+  private ensureContainerId = () => {
+    if (!this.containerRef.getAttribute(CONTAINER_ID_ATTRIBUTE)) {
+      this.containerRef.setAttribute(CONTAINER_ID_ATTRIBUTE, Lottie.generateUuid());
+    }
+  };
+
+  private destroy = () => {
+    const id = this.containerRef.getAttribute(CONTAINER_ID_ATTRIBUTE);
+    this.animationItem.destroy(id);
+    this.containerRef.removeAttribute(CONTAINER_ID_ATTRIBUTE);
+  };
 
   public static defaultProps = {
     lottieEventListeners: [],
@@ -31,6 +52,7 @@ export class Lottie extends React.PureComponent<ReactLottieOwnProps, ReactLottie
     if (animationRef) {
       animationRef.current = this.animationItem;
     }
+    this.ensureContainerId();
     this.addEventListeners(lottieEventListeners);
     this.configureAnimationItem();
   }
@@ -40,7 +62,7 @@ export class Lottie extends React.PureComponent<ReactLottieOwnProps, ReactLottie
     const animationPathChanged = ((this.config as ReactLottieConfigWithPath).path !== (nextProps.config as ReactLottieConfigWithPath).path);
     if (animationDataChanged || animationPathChanged) {
       this.removeEventListeners(this.props.lottieEventListeners);
-      this.animationItem.destroy();
+      this.destroy();
       this.config = { ...this.config, ...nextProps.config };
       this.animationItem = lottiePlayer.loadAnimation(this.config as AnimationConfig);
       this.addEventListeners(nextProps.lottieEventListeners);
@@ -53,8 +75,7 @@ export class Lottie extends React.PureComponent<ReactLottieOwnProps, ReactLottie
 
   componentWillUnmount() {
     this.removeEventListeners(this.props.lottieEventListeners);
-    this.animationItem.wrapper=this.animationItem.wrapper || {}
-    this.animationItem.destroy(this.animationItem.wrapper);
+    this.destroy();
     (this.config as ReactLottieConfigWithData).animationData = null;
     (this.config as ReactLottieConfigWithPath).path = null;
     this.animationItem = null;
