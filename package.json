@@ -1,6 +1,6 @@
 {
   "name": "@crello/react-lottie",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "private": false,
@@ -26,7 +26,7 @@
     "rollup-plugin-typescript2": "0.22.1",
     "ts-node": "8.3.0",
     "tslib": "1.10.0",
-    "typescript": "3.5.3"
+    "typescript": "3.8.3"
   },
   "peerDependencies": {
     "react": "~16.9.0",
@@ -46,7 +46,7 @@
     "dist"
   ],
   "dependencies": {
-    "lottie-web": "5.5.9"
+    "lottie-web": "5.7.1"
   },
   "keywords": [
     "react",
