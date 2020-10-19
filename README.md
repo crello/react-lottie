@@ -13,7 +13,7 @@ you can find demo files in `./examples` folder -- launch with `yarn start`
 ## Usage
 Most basic react-lottie example:
 ```typescript
-import React from 'react';
+import * as React from 'react';
 import { Lottie } from '@crello/react-lottie'
 import animationData from './myAwesomeAnimation.json'
 
