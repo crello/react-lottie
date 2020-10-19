@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import lottiePlayer, { AnimationItem, AnimationConfig } from 'lottie-web';
 import { ReactLottieOwnProps, ReactLottieEvent, ReactLottieConfig, ReactLottiePlayingState, ReactLottieState, ReactLottieConfigWithData, ReactLottieConfigWithPath  } from './interface'
 

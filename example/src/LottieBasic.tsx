@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Lottie } from './reactComponentLib';
 import animationData from './lotties/11705-lightning-vfx.json'
 
