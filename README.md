@@ -1,9 +1,11 @@
+# Reason For Fork
+https://github.com/crello/react-lottie/pull/29
+
+--- 
+
 # @crello/react-lottie
 
 React/Typescript wrapper for awesome Airbnb's [lottie-web](https://github.com/airbnb/lottie-web) lib.
-
-## Reason For Fork
-https://github.com/crello/react-lottie/pull/29
 
 ## Demo 
 [https://crello.github.io/react-lottie/](https://crello.github.io/react-lottie/)
