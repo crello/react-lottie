@@ -41,7 +41,8 @@
     "build:watch": "rollup -c -w",
     "install:all": "yarn && cd example && yarn",
     "lint:check": "eslint ./src/**/*.ts ./src/**/*.tsx ./example/src/**/*.ts ./example/src/**/*.tsx",
-    "lint:fix": "npm run lint:check -- --fix"
+    "lint:fix": "npm run lint:check -- --fix",
+    "postinstall": "yarn build"
   },
   "files": [
     "dist"
